@@ -3,6 +3,7 @@ import validator from 'validator'
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import {EXPIRATION_TIME,SECRET_KEY} from '../middleware/auth.js'
 
 // Modelo de usuario
 const modeloUser =
@@ -41,8 +42,7 @@ const userSchema = new mongoose.Schema(modeloUser)
 // genera el token para el usuario logueado
 userSchema.methods.generateAuthToken = async function () {
     const user = this
-
-    const token = jwt.sign({ _id: user._id.toString() }, 'nuevakey', { expiresIn: '30s' })
+    const token = jwt.sign({ _id: user._id.toString() }, SECRET_KEY, { expiresIn: EXPIRATION_TIME })
     user.tokens = user.tokens.concat({ token: token })
     user.save()
     
