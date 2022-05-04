@@ -23,7 +23,7 @@ router.post('/user/login', async (req, res) => {
         const user = await User.findByCredentials(req.body.correo, req.body.password)
         const token = await user.generateAuthToken()
 
-        res.status(201).send({ user, token })
+        res.status(200).send({ user, token })
     } catch (error) {
         res.status(400).send({ msg: 'No se puede conectar' })
     }
