@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 // Modelo de task
 const modeloTask = {
-  tipo: {
+  tipo: { 
     type: String,
     required: true,
     enum: { values: ["Tarea", "Recordatorio", "Especificacion"], message: "{value} no es una opcion" },
